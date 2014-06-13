@@ -4,7 +4,7 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer = Answer.new(answer_params)
     if @answer.save
-      flash[:notice] = "Comment Saved"
+      flash[:notice] = "Comment Saved!"
       redirect_to @question
     else
       flash.now[:notice] = "Invalid answer!  Please try again."

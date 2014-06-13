@@ -1,6 +1,7 @@
 <h3><%= @question.title %></h3><br>
 <div><%= @question.description %></div><br>
 
+<h3>Provide an answer:</h3>
 <%= form_for [@question, @answer] do |f| %>
   <%= f.label :description %>
   <%= f.text_area :description %><br>
@@ -8,11 +9,20 @@
   <%= f.submit %>
 <% end %>
 
+<h3>Submitted Answers:</h3>
 <ul>
   <% @question.answers.order(created_at: :desc).each do |answer| %>
     <li><%= answer.description %></li>
   <% end %>
 </ul>
+
+<div>
+<%= link_to "Edit this question", edit_question_path %>
+</div>
+
+<div>
+  <%= link_to 'Delete this question', question_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
 
 <div>
 <%= link_to "Questions List", questions_path %>

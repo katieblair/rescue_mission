@@ -23,6 +23,29 @@ class QuestionsController < ApplicationController
     @answer = Answer.new
   end
 
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    @question = Question.find(params[:id])
+    if @question.update(question_params)
+      redirect_to question_path(@question)
+    else
+      flash[:notice] = "Invalid input, please try again!"
+      redirect_to edit_question_path(@question)
+    end
+  end
+
+    def destroy
+    @question = Question.find(params[:id])
+    if @question.destroy
+      redirect_to questions_path
+    else
+      render :show
+    end
+  end
+
   private
 
   def question_params
