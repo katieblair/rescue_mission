@@ -1,0 +1,19 @@
+<h3><%= @question.title %></h3><br>
+<div><%= @question.description %></div><br>
+
+<%= form_for [@question, @answer] do |f| %>
+  <%= f.label :description %>
+  <%= f.text_area :description %><br>
+
+  <%= f.submit %>
+<% end %>
+
+<ul>
+  <% @question.answers.order(created_at: :desc).each do |answer| %>
+    <li><%= answer.description %></li>
+  <% end %>
+</ul>
+
+<div>
+<%= link_to "Questions List", questions_path %>
+</div>
