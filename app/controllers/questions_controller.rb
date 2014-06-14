@@ -39,7 +39,11 @@ class QuestionsController < ApplicationController
 
     def destroy
     @question = Question.find(params[:id])
+    @question.answers.each do |answer|
+      answer.destroy
+    end
     if @question.destroy
+      flash[:notice] = "This question was removed."
       redirect_to questions_path
     else
       render :show
